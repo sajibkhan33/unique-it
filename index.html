@@ -2,228 +2,421 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Unique IT - Official Links</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Unique IT • Official Links</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --bg: #030712;
+      --card-bg: rgba(17, 24, 39, 0.75);
+      --border: rgba(255, 255, 255, 0.08);
+      --border-hover: rgba(255, 255, 255, 0.2);
+      --text: #f9fafb;
+      --text-muted: #94a3b8;
+      --fb-blue: #1877F2;
+      --wa-green: #25D366;
+    }
+
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
+      -webkit-tap-highlight-color: transparent;
     }
+
     body {
-      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background: radial-gradient(circle at 50% 0%, #1e293b 0%, #0f172a 50%, #020617 100%);
-      color: #f8fafc;
-      min-height: 100vh;
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      min-height: 100dvh;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
-      padding: 24px 16px;
-    }
-    .card {
-      width: 100%;
-      max-width: 440px;
-      background: rgba(30, 41, 59, 0.7);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border-radius: 32px;
-      padding: 40px 24px 32px;
-      box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.65), 0 0 0 1px rgba(255, 255, 255, 0.05);
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      animation: fadeIn 0.6s ease-out;
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(16px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    .avatar-wrapper {
+      justify-content: space-between;
+      padding: env(safe-area-inset-top, 24px) 18px env(safe-area-inset-bottom, 20px);
       position: relative;
-      margin-bottom: 20px;
+      overflow-x: hidden;
     }
-    .avatar {
-      width: 96px;
-      height: 96px;
+
+    /* Ambient Background Glow */
+    .glow-bg {
+      position: fixed;
+      top: -20%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 500px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(37, 99, 235, 0.18) 0%, rgba(16, 185, 129, 0.08) 50%, transparent 70%);
+      filter: blur(80px);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .main-wrapper {
+      width: 100%;
+      max-width: 400px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+      margin: auto 0;
+    }
+
+    /* Profile Header */
+    .profile-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      margin-bottom: 28px;
+    }
+
+    .avatar-ring {
+      position: relative;
+      padding: 3px;
+      background: linear-gradient(135deg, #38bdf8, #2563eb 50%, #10b981);
       border-radius: 50%;
-      background: linear-gradient(135deg, #2563eb, #06b6d4);
+      margin-bottom: 14px;
+      box-shadow: 0 10px 28px -6px rgba(37, 99, 235, 0.4);
+    }
+
+    .avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: #0b0f19;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 38px;
+      font-size: 32px;
       font-weight: 800;
       color: #ffffff;
-      box-shadow: 0 12px 30px rgba(37, 99, 235, 0.45);
-      border: 3px solid rgba(255, 255, 255, 0.25);
+      letter-spacing: -1px;
     }
-    .status-badge {
+
+    .status-indicator {
+      position: absolute;
+      bottom: 4px;
+      right: 4px;
+      width: 14px;
+      height: 14px;
+      background: #22c55e;
+      border: 2.5px solid #030712;
+      border-radius: 50%;
+    }
+
+    .status-indicator::after {
+      content: '';
+      position: absolute;
+      top: -2.5px;
+      left: -2.5px;
+      right: -2.5px;
+      bottom: -2.5px;
+      border-radius: 50%;
+      background: #22c55e;
+      opacity: 0.6;
+      animation: pulse 2s infinite ease-out;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); opacity: 0.8; }
+      100% { transform: scale(2.2); opacity: 0; }
+    }
+
+    .title-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 6px;
+    }
+
+    h1 {
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -0.4px;
+      color: #ffffff;
+    }
+
+    .verified-badge {
       width: 18px;
       height: 18px;
-      background: #22c55e;
-      border: 3px solid #0f172a;
-      border-radius: 50%;
-      position: absolute;
-      bottom: 2px;
-      right: 4px;
+      fill: #38bdf8;
     }
-    h1 {
-      font-size: 26px;
-      font-weight: 800;
-      color: #ffffff;
-      margin-bottom: 8px;
-      letter-spacing: -0.5px;
-    }
-    .tagline {
-      font-size: 14px;
+
+    .bio-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 100px;
+      font-size: 12px;
+      font-weight: 500;
       color: #94a3b8;
-      margin-bottom: 32px;
-      line-height: 1.5;
     }
-    .links {
+
+    .online-dot {
+      width: 6px;
+      height: 6px;
+      background: #22c55e;
+      border-radius: 50%;
+    }
+
+    /* Slim-fit Action Buttons */
+    .links-group {
+      width: 100%;
       display: flex;
       flex-direction: column;
-      gap: 16px;
-      width: 100%;
+      gap: 12px;
     }
-    .link-btn {
+
+    .link-card {
+      width: 100%;
       display: flex;
       align-items: center;
-      gap: 16px;
-      padding: 16px 20px;
+      gap: 14px;
+      padding: 14px 16px;
       border-radius: 20px;
       text-decoration: none;
-      font-weight: 600;
-      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
       position: relative;
-      border: 1px solid rgba(255, 255, 255, 0.12);
+      overflow: hidden;
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    .link-btn:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 12px 28px rgba(0,0,0,0.4);
+
+    .link-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 60%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.06), transparent);
+      transition: left 0.6s ease;
     }
-    .link-btn:active {
-      transform: translateY(0);
+
+    .link-card:active {
+      transform: scale(0.975);
     }
-    .link-fb {
-      background: linear-gradient(135deg, #0866FF 0%, #0052cc 100%);
+
+    .link-card:hover::before {
+      left: 140%;
+    }
+
+    /* Facebook Card Styling */
+    .link-card.facebook {
+      background: linear-gradient(135deg, rgba(24, 119, 242, 0.12) 0%, rgba(17, 24, 39, 0.8) 100%);
+      border-color: rgba(24, 119, 242, 0.35);
+    }
+
+    .link-card.facebook:hover {
+      border-color: rgba(24, 119, 242, 0.7);
+      box-shadow: 0 8px 24px -6px rgba(24, 119, 242, 0.35);
+    }
+
+    .icon-box.fb {
+      background: #1877F2;
       color: #ffffff;
-      box-shadow: 0 8px 24px rgba(8, 102, 255, 0.35);
+      box-shadow: 0 4px 14px rgba(24, 119, 242, 0.45);
     }
-    .link-fb:hover {
-      box-shadow: 0 14px 32px rgba(8, 102, 255, 0.55);
+
+    /* WhatsApp Card Styling */
+    .link-card.whatsapp {
+      background: linear-gradient(135deg, rgba(37, 211, 102, 0.12) 0%, rgba(17, 24, 39, 0.8) 100%);
+      border-color: rgba(37, 211, 102, 0.35);
     }
-    .link-wa {
-      background: linear-gradient(135deg, #25D366 0%, #1eaf52 100%);
+
+    .link-card.whatsapp:hover {
+      border-color: rgba(37, 211, 102, 0.7);
+      box-shadow: 0 8px 24px -6px rgba(37, 211, 102, 0.35);
+    }
+
+    .icon-box.wa {
+      background: #25D366;
       color: #ffffff;
-      box-shadow: 0 8px 24px rgba(37, 211, 102, 0.35);
+      box-shadow: 0 4px 14px rgba(37, 211, 102, 0.45);
     }
-    .link-wa:hover {
-      box-shadow: 0 14px 32px rgba(37, 211, 102, 0.55);
-    }
+
     .icon-box {
       width: 44px;
       height: 44px;
       border-radius: 14px;
-      background: rgba(255, 255, 255, 0.2);
       display: flex;
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
     }
+
     .icon-box svg {
-      width: 24px;
-      height: 24px;
+      width: 22px;
+      height: 22px;
       fill: #ffffff;
     }
-    .text-box {
-      text-align: left;
+
+    .text-area {
       flex: 1;
+      text-align: left;
+      min-width: 0;
     }
-    .btn-title {
-      font-size: 16px;
+
+    .text-title {
+      font-size: 15px;
       font-weight: 700;
       color: #ffffff;
-      line-height: 1.3;
+      line-height: 1.25;
+      display: flex;
+      align-items: center;
+      gap: 6px;
     }
-    .btn-desc {
+
+    .badge-subtle {
+      font-size: 10px;
+      padding: 2px 6px;
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.1);
+      font-weight: 600;
+    }
+
+    .text-sub {
       font-size: 12px;
-      opacity: 0.9;
-      font-weight: 400;
-      margin-top: 2px;
+      color: #94a3b8;
+      font-weight: 500;
+      margin-top: 3px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
-    .arrow-icon {
-      width: 20px;
-      height: 20px;
-      opacity: 0.75;
-      transition: transform 0.2s;
+
+    .arrow-btn {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: #94a3b8;
+      transition: all 0.2s ease;
     }
-    .link-btn:hover .arrow-icon {
-      transform: translateX(4px);
-      opacity: 1;
+
+    .link-card:hover .arrow-btn {
+      background: #ffffff;
+      color: #000000;
+      transform: translateX(2px);
     }
-    .footer {
-      margin-top: 36px;
-      font-size: 12px;
+
+    .arrow-btn svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    /* Footer */
+    footer {
+      width: 100%;
+      text-align: center;
+      padding-top: 24px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .footer-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      font-weight: 600;
       color: #64748b;
-      letter-spacing: 0.5px;
+      letter-spacing: 0.3px;
+      text-transform: uppercase;
     }
   </style>
 </head>
 <body>
 
-  <div class="card">
-    <div class="avatar-wrapper">
-      <div class="avatar">U</div>
-      <div class="status-badge" title="Online"></div>
-    </div>
-    
-    <h1>Unique IT</h1>
-    <p class="tagline">Select your preferred platform to connect with us</p>
+  <div class="glow-bg"></div>
 
-    <div class="links">
+  <div class="main-wrapper">
+    <!-- Header -->
+    <div class="profile-section">
+      <div class="avatar-ring">
+        <div class="avatar">U</div>
+        <div class="status-indicator" title="Available"></div>
+      </div>
+      
+      <div class="title-row">
+        <h1>Unique IT</h1>
+        <svg class="verified-badge" viewBox="0 0 24 24">
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+        </svg>
+      </div>
+
+      <div class="bio-tag">
+        <span class="online-dot"></span>
+        <span>Verified Official Channel</span>
+      </div>
+    </div>
+
+    <!-- Slim-Fit Link Cards -->
+    <div class="links-group">
       <!-- Facebook Button -->
-      <a href="https://www.facebook.com/share/1JM3a5LaEK/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" class="link-btn link-fb">
-        <div class="icon-box">
+      <a href="https://www.facebook.com/share/1JM3a5LaEK/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" class="link-card facebook">
+        <div class="icon-box fb">
           <svg viewBox="0 0 24 24">
             <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
           </svg>
         </div>
-        <div class="text-box">
-          <div class="btn-title">Facebook Page</div>
-          <div class="btn-desc">Follow page & send message</div>
+        <div class="text-area">
+          <div class="text-title">
+            Facebook Page
+            <span class="badge-subtle">Official</span>
+          </div>
+          <div class="text-sub">Follow & message us on Facebook</div>
         </div>
-        <svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="9 18 15 12 9 6"></polyline>
-        </svg>
+        <div class="arrow-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </div>
       </a>
 
       <!-- WhatsApp Button -->
-      <a href="https://wa.me/message/6SJXUJQS4BVCD1" target="_blank" rel="noopener noreferrer" class="link-btn link-wa">
-        <div class="icon-box">
+      <a href="https://wa.me/message/6SJXUJQS4BVCD1" target="_blank" rel="noopener noreferrer" class="link-card whatsapp">
+        <div class="icon-box wa">
           <svg viewBox="0 0 24 24">
             <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
           </svg>
         </div>
-        <div class="text-box">
-          <div class="btn-title">WhatsApp Chat</div>
-          <div class="btn-desc">Chat directly with our team</div>
+        <div class="text-area">
+          <div class="text-title">
+            WhatsApp Direct
+            <span class="badge-subtle">Chat</span>
+          </div>
+          <div class="text-sub">Instant chat with support team</div>
         </div>
-        <svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="9 18 15 12 9 6"></polyline>
-        </svg>
+        <div class="arrow-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </div>
       </a>
     </div>
-
-    <div class="footer">
-      &copy; Unique IT &bull; All Rights Reserved
-    </div>
   </div>
+
+  <!-- Minimal Footer -->
+  <footer>
+    <div class="footer-pill">
+      Unique IT &bull; All Rights Reserved
+    </div>
+  </footer>
 
 </body>
 </html>
